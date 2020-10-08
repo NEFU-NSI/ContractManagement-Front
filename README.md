@@ -1,19 +1,28 @@
 # contract_management
 
-## Project setup
-```
-npm install
+## 2020/10/08
+
+1. 初始化项目
+
+```shell script
+vue create contract_management
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+2. 在Github上创建项目
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+3. 将本地项目与Github项目关联
+
+4. 删除Vue脚手架自动生成的HelloWorld等
+
+5. 引入Element-ui 和 Axios等依赖
+
+6. 配置Axios
+
+7. 配置项目的目录结构
+
+8. 登陆页面
+
+9. 首页布局
+
+10. 对接Api接口等

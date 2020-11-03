@@ -1,13 +1,12 @@
 import axios from 'axios'
-import config from '../../config'
+import {getItem} from "@/utils/storage";
 
 /**
  * 创建axios实例, 配置路由, 连接超时等...
  * @type {AxiosInstance}
  */
 const axiosInstance = axios.create({
-    baseURL: config.baseURL,
-    timeout: config.timeout
+    baseURL: 'http://10.10.11.141:8080/api/'
 })
 
 /**
@@ -17,6 +16,11 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     config => {
         // 这里可以自定义一些config 配置
+        let token = getItem('token')
+        console.log('axiso request token -->' + token)
+        if (token) {
+            config.headers.Authorization = 'Bearer ' + token
+        }
         return config
     },
     error => {
@@ -32,18 +36,18 @@ axiosInstance.interceptors.request.use(
 // response 拦截器
 axiosInstance.interceptors.response.use(
     response => {
-        const res = response.data
-        console.log("拦截到数据：", res)
-        // //验证未登录，或token不合法时，直接跳到登录页
-        // if (res.code == -200) {
-        //     member.removeMemberSession();
-        // } else {
-        //     //普通错误，统一处理
-        //     if (res.code == -1) {
-        //         throw res.msg;
-        //     }
-        // }
-        return res
+        // const res = response
+        // console.log("拦截到数据：", res)
+        // // //验证未登录，或token不合法时，直接跳到登录页
+        // // if (res.code == -200) {
+        // //     member.removeMemberSession();
+        // // } else {
+        // //     //普通错误，统一处理
+        // //     if (res.code == -1) {
+        // //         throw res.msg;
+        // //     }
+        // // }
+        return response
     },
     error => {
         // 这里处理一些response 出错时的逻辑

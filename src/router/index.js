@@ -1,38 +1,115 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from "@/views/Index";
+
 
 const Login = () => import('../views/Login')
-const User = () => import('../views/user')
-const Contract = () => import('../views/contract')
-const File = () => import('../views/file')
+const Register = () => import('../views/Register')
 const Test = () => import('../views/test')
-const UserManagement = () => import('../views/usermanagement')
+const Layout = () => import('../layout/index')
 
 Vue.use(VueRouter)
 
 const routes = [
     {
         path: '/',
-        component: Index,
+        component: Layout,
+        hidden: false,
         children: [
-            {path: '/user', component: User},
-            {path: '/contract', component: Contract},
-            {path: '/file', component: File},
-            {path: '/userManagement', component: UserManagement}
+            {
+                path: '',
+                name: '首页',
+                component: () => import('../views/Index')
+            }
         ]
     },
     {
+        path: '/user-submenu',
+        name: '用户管理',
+        component: Layout,
+        children: [
+            {
+                path: '/userInfo',
+                name: '个人信息',
+                component: () => import('../views/user/index')
+            },
+            {
+                path: '/updatePassword',
+                name: '修改密码',
+                component: () => import('../views/user/UpdatePassword')
+            }
+        ]
+    },
+    {
+        path: '/department-submenu',
+        name: '部门管理',
+        component: Layout,
+        children: [
+            {
+                path: '/allDepartment',
+                name: '所有部门',
+                component: () => import('../views/department/index')
+            },
+            {
+                path: '/addDepartment',
+                name: '增加部门',
+                component: () => import('../views/department/AddDepartment')
+            }
+        ]
+    },
+
+    {
+        path: '/notice-submenu',
+        name: '提醒通知',
+        component: Layout,
+        children: [
+            {
+                path: '/allNotice',
+                name: '通知列表',
+                component: () => import('../views/notice/index')
+            }
+        ]
+    },
+
+    {
+        path: '/contract-submenu',
+        name: '合同管理',
+        component: Layout,
+        children: [
+            {
+                path: '/allContract',
+                name: '合同列表',
+                component: () => import('../views/contract/index')
+            },
+            {
+                path: '/addContract',
+                name: '添加合同',
+                component: () => import('../views/contract/AddContract')
+            }
+        ]
+    },
+
+    {
         path: '/login',
+        name: '登陆',
+        hidden: true,
         component: Login
     },
     {
+        path: '/register',
+        name: '注册',
+        hidden: true,
+        component: Register
+    },
+    {
         path: '/test',
+        name: '测试',
+        hidden: true,
         component: Test
     }
 ]
 
 const router = new VueRouter({
+    mode: "history",
     routes
 })
 

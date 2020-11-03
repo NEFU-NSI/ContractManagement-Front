@@ -18,7 +18,7 @@
           <i class="el-icon-s-home"></i>
           <span slot="title">首页</span>
         </el-menu-item>
-        <el-menu-item index="/article">
+        <el-menu-item index="/contract">
           <i class="el-icon-document"></i>
           <span slot="title">合同管理</span>
         </el-menu-item>
@@ -37,6 +37,10 @@
         <el-menu-item index="/user">
           <i class="el-icon-setting"></i>
           <span slot="title">个人设置</span>
+        </el-menu-item>
+        <el-menu-item index="/departMent">
+          <i class="el-icon-setting"></i>
+          <span slot="title">部门管理</span>
         </el-menu-item>
       </el-menu>
     </el-aside>

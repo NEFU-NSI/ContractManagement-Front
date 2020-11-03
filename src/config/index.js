@@ -7,7 +7,7 @@ const config = {
      */
     development: {
         timeOut: 5000,
-        baseURL: 'http://10.10.11.141:8080/api/'
+        baseURL: '/api/'
     },
 
     /**

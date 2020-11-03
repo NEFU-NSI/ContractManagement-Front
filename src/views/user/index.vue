@@ -37,12 +37,15 @@
           <p style="text-align:center">修改头像</p>
         </el-col>
       </el-row>
+      <el-button @click="getUserInfo">获取用户信息</el-button>
     </el-card>
   </div>
 </template>
 
 <script>
 import MyBread from '@/components/my-bread'
+import {getUserInfoApi} from "@/apis/userApi";
+
 export default {
   name: "index",
   components: {MyBread},
@@ -73,6 +76,10 @@ export default {
   },
 
   methods: {
+    getUserInfo() {
+      let resp = getUserInfoApi();
+      console.log('userInfo resp-->' + resp)
+    },
     updateUserPhoto() {
       console.log('更新用户头像')
     },

@@ -84,6 +84,11 @@ const routes = [
                 path: '/addContract',
                 name: '添加合同',
                 component: () => import('../views/contract/AddContract')
+            },
+            {
+                path: '/contract-test',
+                name: '组件测试',
+                component: () => import('../views/contract/test')
             }
         ]
     },

@@ -76,9 +76,9 @@ export default {
   },
 
   methods: {
-    getUserInfo() {
-      let resp = getUserInfoApi();
-      console.log('userInfo resp-->' + resp)
+    async getUserInfo() {
+      let resp = await getUserInfoApi();
+      console.log('userInfo resp-->', resp)
     },
     updateUserPhoto() {
       console.log('更新用户头像')

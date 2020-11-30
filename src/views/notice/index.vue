@@ -57,7 +57,7 @@ export default {
       } else {
         console.log('false')
         let resp = await readNoticeApi(row.id)
-        console.log('notice resp-->' + resp)
+        console.log('notice resp', resp)
         if (resp.data.code == 200) {
           this.$message.success('标记成功')
         }

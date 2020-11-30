@@ -19,9 +19,48 @@
             <el-button
                 type="primary"
                 size="mini"
-                @click="update(scope.row)">
+                @click="updateBtn(scope.row)">
               修改名称
             </el-button>
+            <el-dialog :visible.sync="openUpdate">
+              <div class="dialog-title-container" slot="title">
+                更新部门名称
+              </div>
+              <el-form>
+                <el-form-item label="旧名称">
+                  <el-input v-model="oldName" readonly></el-input>
+                </el-form-item>
+                <el-form-item label="新名称">
+                  <el-input v-model="newName"></el-input>
+                </el-form-item>
+              </el-form>
+              <div slot="footer">
+                <el-button @click="openUpdate = false">取 消</el-button>
+                <el-button type="primary" @click="updateEvent">
+                  更新
+                </el-button>
+              </div>
+            </el-dialog>
+
+            <el-button
+                type="danger"
+                size="mini"
+                @click="deleteBtn(scope.row)">
+              删除部门
+            </el-button>
+            <el-dialog :visible.sync="openDelete">
+              <div class="dialog-title-container" slot="title">
+                警告
+              </div>
+              <span>是否确认删除该部门</span>
+              <div slot="footer">
+                <el-button @click="openDelete = false">取 消</el-button>
+                <el-button type="primary" @click="deleteEvent">
+                  确 定
+                </el-button>
+              </div>
+            </el-dialog>
+
           </template>
         </el-table-column>
       </el-table>
@@ -30,22 +69,56 @@
 </template>
 
 <script>
-import {getAllDepartmentApi} from "@/apis/departmentApi";
+import {deleteDepartmentApi, getAllDepartmentApi, updateDepartmentApi} from "@/apis/departmentApi";
 
 export default {
   name: "index",
   data() {
     return {
-      departmentList: []
+      oldName: '',
+      newName: '',
+      openDelete: false,
+      departmentList: [],
+      row: '',
+      openUpdate: false
     }
   },
   created() {
     this.initPage()
   },
   methods: {
-    async update(row) {
-      console.log('row-->' + JSON.stringify(row))
+    async updateEvent() {
+      if (this.newName) {
+        let data = {
+          departmentName: this.newName
+        }
+        let resp = await updateDepartmentApi(data)
+        console.log('更新resp-->', resp)
+        // TODO 更新成功的逻辑
+      } else {
+        this.$message.error('请填写新的部门名称')
+      }
+    },
+    deleteBtn(row) {
+      console.log('row-->', row)
+      this.row = row
+      this.openDelete = true
+    },
+    async deleteEvent() {
+      if (this.row) {
+        let resp = await deleteDepartmentApi(this.row.id)
+        console.log('删除resp-->', resp)
+        // TODO 删除成功的逻辑
 
+      } else {
+        this.$message.error('禁止操作')
+      }
+    },
+    async updateBtn(row) {
+      console.log('row-->', row)
+      this.row = row
+      this.openUpdate = true
+      this.oldName = row.departmentName
     },
     async initPage() {
       let resp = await getAllDepartmentApi()

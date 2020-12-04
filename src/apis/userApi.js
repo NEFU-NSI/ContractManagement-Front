@@ -13,6 +13,7 @@ export const getUserInfoApi = () => {
     return axiosInstance({
         method: 'GET',
         url: 'user/info',
+
     })
 }
 

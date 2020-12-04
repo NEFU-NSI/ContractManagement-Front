@@ -20,10 +20,11 @@ export const getAllDepartmentApi = () => {
  * @param data
  * @returns {*}
  */
-export const updateDepartmentApi = (data) => {
+export const updateDepartmentApi = (paramsData, data) => {
     return axiosInstance({
         method: 'PUT',
         url: 'department/update',
+        params: paramsData,
         data: data
     })
 }

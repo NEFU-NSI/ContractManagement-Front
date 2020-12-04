@@ -6,7 +6,7 @@ import {getItem} from "@/utils/storage";
  * @type {AxiosInstance}
  */
 const axiosInstance = axios.create({
-    baseURL: 'http://10.10.11.141:8080/api/'
+    baseURL: '/api/'
 })
 
 /**

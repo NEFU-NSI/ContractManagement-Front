@@ -24,3 +24,15 @@ export const loginApi = (email, password) => {
         }
     )
 }
+
+export const testLoginApi = (email, password) => {
+    return axiosInstance({
+            method: 'POST',
+            url: 'user/login',
+            params: {
+                email: email,
+                password: password
+            }
+        }
+    )
+}

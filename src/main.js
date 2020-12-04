@@ -20,7 +20,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Axios from "axios"
-import Config from './config'
+// import Config from './config'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -30,7 +30,7 @@ Vue.config.productionTip = false
 
 //挂载属性
 Vue.prototype.$axios = Axios
-Vue.prototype.config = Config
+// Vue.prototype.config = Config
 
 Vue.use(ElementUI)
 

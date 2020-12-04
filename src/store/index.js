@@ -7,6 +7,7 @@ export default new Vuex.Store({
     state: {
         collapse: false,
         tabList: [{name: "首页", path: "/"}],
+        avatar: null
     },
     mutations: {
         //折叠菜单栏

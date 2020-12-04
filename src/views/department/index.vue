@@ -92,9 +92,20 @@ export default {
         let data = {
           departmentName: this.newName
         }
-        let resp = await updateDepartmentApi(data)
+        let departmentId = this.row.id
+        let paramsData = {
+          departmentId: departmentId
+        }
+        let resp = await updateDepartmentApi(paramsData, data)
         console.log('更新resp-->', resp)
         // TODO 更新成功的逻辑
+        if (resp) {
+          await this.initPage()
+          this.openUpdate = false
+          this.$message.success("更新成功")
+        } else {
+          this.$message.error("更新失败")
+        }
       } else {
         this.$message.error('请填写新的部门名称')
       }
@@ -109,6 +120,13 @@ export default {
         let resp = await deleteDepartmentApi(this.row.id)
         console.log('删除resp-->', resp)
         // TODO 删除成功的逻辑
+        if (resp) {
+          await this.initPage()
+          this.openDelete = false
+          this.$message.success('删除成功')
+        } else {
+          this.$message.error("删除失败")
+        }
 
       } else {
         this.$message.error('禁止操作')

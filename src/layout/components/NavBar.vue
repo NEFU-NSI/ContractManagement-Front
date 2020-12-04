@@ -13,9 +13,30 @@
           <router-link v-else :to="item.name">{{ item.name }}</router-link>
         </el-breadcrumb-item>
       </el-breadcrumb>
+      <div class="right-menu">
+<!--        &lt;!&ndash; 全屏按钮 &ndash;&gt;-->
+<!--        <div class="screen-full" @click="fullScreen">-->
+<!--          <i class="el-icon-full-screen"/>-->
+<!--        </div>-->
+<!--        用户选项-->
+        <el-dropdown @command="handleCommand">
+          <el-avatar :size="40" :src="this.$store.state.avatar"/>
+          <i class="el-icon-caret-bottom"/>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="setting">
+              <i class="el-icon-s-custom"/>个人中心
+            </el-dropdown-item>
+            <el-dropdown-item command="logout" divided>
+              <i class="iconfont el-icon-mytuichu"/>退出登录
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
-    <!--    历史标签栏-->
-    <div class="tabs-view-container">
+
+
+  <!--    历史标签栏-->
+  <div class="tabs-view-container">
       <span
           v-for="item in tabList"
           :key='item.path'
@@ -29,8 +50,8 @@
         >
         </i>
       </span>
-      <span class="tabs-view-item" style="float: right" @click="closeAllTab">全部关闭</span>
-    </div>
+    <span class="tabs-view-item" style="float: right" @click="closeAllTab">全部关闭</span>
+  </div>
   </div>
 </template>
 
@@ -60,6 +81,16 @@ export default {
     ...mapState(['tabList'])
   },
   methods: {
+    handleCommand(command) {
+      if (command == "setting") {
+        this.$router.push({path: "/setting"});
+      }
+      if (command == "logout") {
+        this.$store.commit("logout");
+        this.$store.commit("resetTab");
+        this.$router.push({path: "/login"});
+      }
+    },
     //移除历史标签选项
     removeTab(tab) {
       this.$store.commit('removeTab', tab)
@@ -173,4 +204,9 @@ export default {
   font-size: 0.75rem;
 }
 
+.screen-full {
+  cursor: pointer;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+}
 </style>
